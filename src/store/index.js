@@ -1,4 +1,9 @@
 import { createStore } from 'vuex'
+import createPersistedstate from 'vuex-persistedstate'
+
+import user from './modules/user'
+import cart from './modules/cart'
+import category from './modules/category'
 
 export default createStore({
   state: {
@@ -10,5 +15,14 @@ export default createStore({
   actions: {
   },
   modules: {
-  }
+    user,
+    cart,
+    category
+  },
+  plugins: [
+    createPersistedstate({
+      key: 'erabbit-pc-store', // key是存储数据的键名
+      paths: ['user', 'cart'] // paths是存储state中的那些数据，如果是模块下具体的数据需要加上模块名称，如user.token
+    })
+  ]
 })
