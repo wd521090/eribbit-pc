@@ -1,13 +1,7 @@
 <template>
-  <div class="container">
-    APP {{$store.state.user.profile.account}}
-    <button @click="$store.commit('user/setUser', {account: 'wd'})">设置用户信息</button>
-  </div>
+  <router-view></router-view>
 </template>
 <script>
-export default {
-  name: 'App'
-}
 </script>
 <style lang="less">
 
