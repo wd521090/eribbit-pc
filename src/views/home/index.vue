@@ -1,13 +1,16 @@
 <template>
-  <div>首页</div>
+  <div class="container">首页</div>
 </template>
 
 <script>
 export default {
-  name: 'xtx-home-page'
+  name: 'HomePage'
 }
 </script>
 
 <style scoped lang="less">
-
+.container {
+  .hoverShadow();
+  color: @xtxColor;
+}
 </style>
