@@ -2,6 +2,9 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
+import ElementPlus from 'element-plus'
+import 'element-plus/dist/index.css'
+import ui from '@/components/library'
 
 import 'normalize.css'
 import '@/assets/styles/common.less'
@@ -18,4 +21,4 @@ import { fab } from '@fortawesome/free-brands-svg-icons'
 library.add(fas, fab)
 // library.add(faUser, faMobileScreen, faCartShopping, faHeadphonesSimple, faCircleQuestion)
 
-createApp(App).use(store).use(router).component('font-awesome-icon', FontAwesomeIcon).mount('#app')
+createApp(App).use(store).use(router).use(ElementPlus).use(ui).component('font-awesome-icon', FontAwesomeIcon).mount('#app')

@@ -6,6 +6,10 @@
         <template v-if="item.children">
           <RouterLink v-for="sub in item.children" :key="sub.id" :to="`/category/sub/${sub.id}`">{{sub.name}}</RouterLink>
         </template>
+        <span v-else>
++          <XtxSkeleton width="60px" height="18px" style="margin-right:5px" bg="rgba(255,255,255,0.2)" />
++          <XtxSkeleton width="50px" height="18px" bg="rgba(255,255,255,0.2)" />
++        </span>
       </li>
     </ul>
     <!-- 弹层 -->
@@ -43,6 +47,7 @@
 import { useStore } from 'vuex'
 import { computed, reactive, ref } from 'vue'
 import { findBrand } from '@/api/home'
+import XtxSkeleton from '@/components/library/xtx-skeleton'
 
 export default {
   name: 'HomeCategory',
@@ -50,6 +55,9 @@ export default {
   // 2. 需要在组件内部，定义一个品牌数据
   // 3. 根据vuex的分类数据和组件中定义品牌数据，得到左侧分类完整数据(9分类+1品牌)数组
   // 4. 进行渲染即可
+  components: {
+    XtxSkeleton
+  },
   setup() {
     const brand = reactive({
       id: 'brand',
@@ -199,6 +207,17 @@ export default {
     .layer {
       display: block;
     }
+  }
+}
+.xtx-skeleton {
+  animation: fade 1s linear infinite alternate;
+}
+@keyframes fade {
+  from {
+    opacity: 0.2;
+  }
+  to {
+    opacity: 1;
   }
 }
 </style>
