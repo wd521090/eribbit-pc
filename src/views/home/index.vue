@@ -5,18 +5,22 @@
       <HomeCategory></HomeCategory>
       <HomeBanner></HomeBanner>
     </div>
+    <!-- 新鲜好物 -->
+    <HomeNew></HomeNew>
   </div>
 </template>
 
 <script>
 import HomeCategory from '@/views/home/components/home-category'
 import HomeBanner from '@/views/home/components/home-banner'
+import HomeNew from '@/views/home/components/home-new'
 
 export default {
   name: 'HomePage',
   components: {
     HomeCategory,
-    HomeBanner
+    HomeBanner,
+    HomeNew
   }
 }
 </script>
