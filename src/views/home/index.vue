@@ -11,6 +11,8 @@
     <HomeHot></HomeHot>
     <!--热门品牌-->
     <HomeBrand></HomeBrand>
+    <!--商品区域-->
+    <HomeProduct></HomeProduct>
   </div>
 </template>
 
@@ -20,6 +22,7 @@ import HomeBanner from '@/views/home/components/home-banner'
 import HomeNew from '@/views/home/components/home-new'
 import HomeHot from '@/views/home/components/home-hot'
 import HomeBrand from '@/views/home/components/home-brand'
+import HomeProduct from '@/views/home/components/home-product'
 
 export default {
   name: 'HomePage',
@@ -28,7 +31,8 @@ export default {
     HomeBanner,
     HomeNew,
     HomeHot,
-    HomeBrand
+    HomeBrand,
+    HomeProduct
   }
 }
 </script>
