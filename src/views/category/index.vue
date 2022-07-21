@@ -5,18 +5,20 @@
       <div class="xtx-bread">
         <el-breadcrumb :separator-icon="ArrowRight">
           <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-          <el-breadcrumb-item>{{ topCategory.name }}</el-breadcrumb-item>
+          <transition name="fade-right" mode="out-in">
+            <el-breadcrumb-item :key="topCategory.id">{{ topCategory.name }}</el-breadcrumb-item>
+          </transition>
         </el-breadcrumb>
       </div>
       <!-- 轮播图 -->
-      <XtxCarousel :sliders="sliders" style="height:500px" />
+      <XtxCarousel :sliders="sliders" style="height:500px"/>
       <!-- 所有二级分类 -->
       <div class="sub-list">
         <h3>全部分类</h3>
         <ul>
           <li v-for="item in topCategory.children" :key="item.id">
             <a href="javascript:">
-              <img :src="item.picture" >
+              <img :src="item.picture">
               <p>{{ item.name }}</p>
             </a>
           </li>
@@ -27,10 +29,10 @@
         <div class="head">
           <h3>- {{ item.name }} -</h3>
           <p class="tag">{{ item.desc }}</p>
-          <XtxMore />
+          <XtxMore/>
         </div>
         <div class="body">
-          <GoodsItem v-for="good in item.goods" :key="good.id" :goods="good" />
+          <GoodsItem v-for="good in item.goods" :key="good.id" :goods="good"/>
         </div>
       </div>
     </div>
@@ -54,7 +56,7 @@ export default {
     XtxCarousel,
     GoodsItem
   },
-  setup() {
+  setup () {
     const sliders = ref([])
     findBanner().then(data => {
       sliders.value = data.result
@@ -80,7 +82,12 @@ export default {
     watch(() => route.params.id, (newVal) => {
       newVal && getSubList()
     }, { immediate: true })
-    return { sliders, ArrowRight, topCategory, subList }
+    return {
+      sliders,
+      ArrowRight,
+      topCategory,
+      subList
+    }
   }
 }
 </script>
@@ -94,27 +101,34 @@ export default {
     text-align: center;
     line-height: 100px;
   }
+
   .sub-list {
     margin-top: 20px;
     background-color: #fff;
+
     ul {
       display: flex;
       padding: 0 32px;
       flex-wrap: wrap;
+
       li {
         width: 168px;
         height: 160px;
+
         a {
           text-align: center;
           display: block;
           font-size: 16px;
+
           img {
             width: 100px;
             height: 100px;
           }
+
           p {
             line-height: 40px;
           }
+
           &:hover {
             color: @xtxColor;
           }
@@ -122,16 +136,19 @@ export default {
       }
     }
   }
+
   .ref-goods {
     background-color: #fff;
     margin-top: 20px;
     position: relative;
+
     .head {
       .xtx-more {
         position: absolute;
         top: 20px;
         right: 20px;
       }
+
       .tag {
         text-align: center;
         color: #999;
@@ -140,6 +157,7 @@ export default {
         top: -20px;
       }
     }
+
     .body {
       display: flex;
       justify-content: flex-start;
