@@ -23,14 +23,14 @@
         </ul>
       </div>
       <!-- 不同分类商品 -->
-      <div class="ref-goods">
+      <div class="ref-goods" v-for="item in subList" :key="item.id">
         <div class="head">
-          <h3>- 海鲜 -</h3>
-          <p class="tag">温暖柔软，品质之选</p>
+          <h3>- {{ item.name }} -</h3>
+          <p class="tag">{{ item.desc }}</p>
           <XtxMore />
         </div>
         <div class="body">
-          <GoodsItem v-for="i in 5" :key="i" />
+          <GoodsItem v-for="good in item.goods" :key="good.id" :goods="good" />
         </div>
       </div>
     </div>
@@ -40,12 +40,13 @@
 <script>
 
 import XtxCarousel from '@/components/library/xtx-carousel'
-import { computed, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { findBanner } from '@/api/home'
 import { ArrowRight } from '@element-plus/icons-vue'
 import { useStore } from 'vuex'
 import { useRoute } from 'vue-router'
 import GoodsItem from '@/views/category/components/goods-item'
+import { findTopCategory } from '@/api/category'
 
 export default {
   name: 'TopCategory',
@@ -68,7 +69,18 @@ export default {
       if (item) cate = item
       return cate
     })
-    return { sliders, ArrowRight, topCategory }
+
+    // 推荐商品
+    const subList = ref([])
+    const getSubList = () => {
+      findTopCategory(route.params.id).then(data => {
+        subList.value = data.result.children
+      })
+    }
+    watch(() => route.params.id, (newVal) => {
+      newVal && getSubList()
+    }, { immediate: true })
+    return { sliders, ArrowRight, topCategory, subList }
   }
 }
 </script>
