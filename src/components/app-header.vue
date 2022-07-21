@@ -4,7 +4,7 @@
       <h1 class="logo"><RouterLink to="/">小兔鲜</RouterLink></h1>
       <AppHeaderNav/>
       <div class="search">
-        <i class="iconfont icon-search"></i>
+        <Search style="width: 1em; height: 1em; margin-right: 8px" />
         <input type="text" placeholder="搜一搜">
       </div>
       <div class="cart">
@@ -18,11 +18,13 @@
 
 <script>
 import AppHeaderNav from '@/components/app-header-nav'
+import { Search } from '@element-plus/icons-vue'
 
 export default {
   name: 'AppHeader',
   components: {
-    AppHeaderNav
+    AppHeaderNav,
+    Search
   }
 }
 </script>

@@ -3,14 +3,10 @@
     <template v-slot:right>
       <el-row>
         <el-button color="#27BA9B" size="small" @click="toggle(-1)" :disabled="index===0">
-          <el-icon color="white" style="vertical-align: middle">
-            <ArrowLeft />
-          </el-icon>
+          <ArrowLeft style="width: 1em; height: 1em; color: white" />
         </el-button>
         <el-button color="#27BA9B" size="small" @click="toggle(1)" :disabled="index===1">
-          <el-icon color="white" style="vertical-align: middle">
-            <ArrowRight />
-          </el-icon>
+          <ArrowRight style="width: 1em; height: 1em; color: white" />
         </el-button>
       </el-row>
     </template>

@@ -1,8 +1,10 @@
 <template>
-  <div>TopCategory</div>
+  <!-- 面包屑 -->
+  <div></div>
 </template>
 
 <script>
+
 export default {
   name: 'TopCategory'
 }
