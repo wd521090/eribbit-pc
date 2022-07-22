@@ -11,7 +11,12 @@
         </el-breadcrumb>
       </div>
       <!-- 商品信息 -->
-      <div class="goods-info"></div>
+      <div class="goods-info">
+        <div class="media">
+          <GoodsImage :images="goods.mainPictures"></GoodsImage>
+        </div>
+        <div class="spec"></div>
+      </div>
       <!-- 商品推荐 -->
       <GoodsRelevant/>
       <!-- 商品详情 -->
@@ -35,11 +40,13 @@ import { ArrowRight } from '@element-plus/icons-vue'
 import { nextTick, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { findGoods } from '@/api/product'
+import GoodsImage from '@/views/goods/components/goods-image'
 
 export default {
   name: 'GoodsPage',
   components: {
-    GoodsRelevant
+    GoodsRelevant,
+    GoodsImage
   },
   setup() {
     const goods = useGoods()
@@ -71,6 +78,16 @@ const useGoods = () => {
 .goods-info {
   min-height: 600px;
   background: #fff;
+  display: flex;
+  .media {
+    width: 580px;
+    height: 600px;
+    padding: 30px 50px;
+  }
+  .spec {
+    flex: 1;
+    padding: 30px 30px 30px 0;
+  }
 }
 
 .goods-footer {
