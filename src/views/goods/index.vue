@@ -1,13 +1,13 @@
 <template>
-  <div class='xtx-goods-page'>
+  <div class='xtx-goods-page'  v-if="goods">
     <div class="container">
       <!-- 面包屑 -->
       <div class="xtx-bread">
         <el-breadcrumb :separator-icon="ArrowRight">
           <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-          <el-breadcrumb-item>手机</el-breadcrumb-item>
-          <el-breadcrumb-item>华为</el-breadcrumb-item>
-          <el-breadcrumb-item>p30</el-breadcrumb-item>
+          <el-breadcrumb-item :to="'/category/'+goods.categories[0].id">{{goods.categories[0].name}}</el-breadcrumb-item>
+          <el-breadcrumb-item :to="'/category/sub/'+goods.categories[1].id">{{goods.categories[1].name}}</el-breadcrumb-item>
+          <el-breadcrumb-item>{{goods.name}}</el-breadcrumb-item>
         </el-breadcrumb>
       </div>
       <!-- 商品信息 -->
@@ -32,6 +32,9 @@
 <script>
 import GoodsRelevant from '@/views/goods/components/goods-relevant'
 import { ArrowRight } from '@element-plus/icons-vue'
+import { nextTick, ref, watch } from 'vue'
+import { useRoute } from 'vue-router'
+import { findGoods } from '@/api/product'
 
 export default {
   name: 'GoodsPage',
@@ -39,8 +42,28 @@ export default {
     GoodsRelevant
   },
   setup() {
-    return { ArrowRight }
+    const goods = useGoods()
+    return { ArrowRight, goods }
   }
+}
+
+// 获取商品详情
+const useGoods = () => {
+  // 出现路由地址商品ID发生变化，但是不会重新初始化组件
+  const goods = ref(null)
+  const route = useRoute()
+  watch(() => route.params.id, (newVal) => {
+    if (newVal && `/product/${newVal}` === route.path) {
+      findGoods(route.params.id).then(data => {
+        // 让商品数据为null让后使用v-if的组件可以重新销毁和创建
+        goods.value = null
+        nextTick(() => {
+          goods.value = data.result
+        })
+      })
+    }
+  }, { immediate: true })
+  return goods
 }
 </script>
 
