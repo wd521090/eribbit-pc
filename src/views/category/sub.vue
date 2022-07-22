@@ -3,11 +3,11 @@
     <div class="container">
       <!-- 面包屑 -->
       <SubBread/>
-      <SubFilter/>
+      <SubFilter @filter-change="changeFilter"/>
       <!-- 结果区域 -->
       <div class="goods-list">
         <!-- 排序 -->
-        <SubSort/>
+        <SubSort @sort-change="changeSort"/>
         <!-- 列表 -->
         <ul>
           <li v-for="goods in goodsList" :key="goods.id" >
@@ -80,8 +80,21 @@ export default {
         finished.value = false
       }
     })
+    // 监听筛选区改变
+    const changeFilter = (filterParams) => {
+      reqParams = { ...reqParams, ...filterParams }
+      reqParams.page = 1
+      goodsList.value = []
+      finished.value = false
+    }
 
-    return { loading, finished, goodsList, getData }
+    const changeSort = (sortParams) => {
+      reqParams = { ...reqParams, ...sortParams }
+      reqParams.page = 1
+      goodsList.value = []
+      finished.value = false
+    }
+    return { loading, finished, goodsList, getData, changeFilter, changeSort }
   }
 }
 </script>

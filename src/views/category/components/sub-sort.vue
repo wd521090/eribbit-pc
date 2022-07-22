@@ -12,8 +12,8 @@
       </a>
     </div>
     <div class="check">
-      <el-checkbox v-model="sortParams.inventory" label="仅显示有货商品" text-color="#27BA9B" size="large" />
-      <el-checkbox v-model="sortParams.onlyDiscount" label="仅显示特惠商品" size="large" />
+      <el-checkbox @change="changeCheck" v-model="sortParams.inventory" label="仅显示有货商品" size="large" />
+      <el-checkbox @change="changeCheck" v-model="sortParams.onlyDiscount" label="仅显示特惠商品" size="large" />
     </div>
   </div>
 </template>
@@ -23,7 +23,7 @@ import { reactive } from 'vue'
 
 export default {
   name: 'SubSort',
-  setup () {
+  setup (props, { emit }) {
     // 1. 根据后台需要的参数定义数据对象
     // 2. 根据数据对象，绑定组件（复选框，排序按钮）
     // 3. 在操作排序组件的时候，需要反馈给数据对象
@@ -53,8 +53,14 @@ export default {
         sortParams.sortField = sortField
         sortParams.sortMethod = null
       }
+      emit('sort-change', sortParams)
     }
-    return { sortParams, changeSort }
+
+    const changeCheck = (sortField) => {
+      emit('sort-change', sortParams)
+    }
+
+    return { sortParams, changeSort, changeCheck }
   }
 }
 </script>
