@@ -22,6 +22,7 @@
           <GoodsName :goods="goods"/>
           <GoodsSku :goods="goods" @change="changeSku"/>
           <XtxNumbox label="数量" v-model="num" :max="goods.inventory" />
+          <XtxButton type="primary" style="margin-top:20px;">加入购物车</XtxButton>
         </div>
       </div>
       <!-- 商品推荐 -->
@@ -52,6 +53,7 @@ import GoodsSales from '@/views/goods/components/goods-sales'
 import GoodsName from '@/views/goods/components/goods-name'
 import GoodsSku from '@/views/goods/components/good-sku'
 import XtxNumbox from '@/components/library/xtx-numbox'
+import XtxButton from '@/components/library/xtx-button'
 
 export default {
   name: 'GoodsPage',
@@ -61,7 +63,8 @@ export default {
     GoodsSales,
     GoodsName,
     GoodsSku,
-    XtxNumbox
+    XtxNumbox,
+    XtxButton
   },
   setup () {
     const goods = useGoods()
