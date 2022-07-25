@@ -31,7 +31,7 @@
       <div class="goods-footer">
         <div class="goods-article">
           <!-- 商品+评价 -->
-          <div class="goods-tabs"></div>
+          <GoodsTabs></GoodsTabs>
           <!-- 注意事项 -->
           <div class="goods-warn"></div>
         </div>
@@ -54,6 +54,7 @@ import GoodsName from '@/views/goods/components/goods-name'
 import GoodsSku from '@/views/goods/components/good-sku'
 import XtxNumbox from '@/components/library/xtx-numbox'
 import XtxButton from '@/components/library/xtx-button'
+import GoodsTabs from '@/views/goods/components/goods-tabs'
 
 export default {
   name: 'GoodsPage',
@@ -64,7 +65,8 @@ export default {
     GoodsName,
     GoodsSku,
     XtxNumbox,
-    XtxButton
+    XtxButton,
+    GoodsTabs
   },
   setup () {
     const goods = useGoods()
@@ -136,11 +138,6 @@ const useGoods = () => {
     width: 280px;
     min-height: 1000px;
   }
-}
-
-.goods-tabs {
-  min-height: 600px;
-  background: #fff;
 }
 
 .goods-warn {
