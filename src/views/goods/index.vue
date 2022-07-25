@@ -48,7 +48,7 @@
 <script>
 import GoodsRelevant from '@/views/goods/components/goods-relevant'
 import { ArrowRight } from '@element-plus/icons-vue'
-import { nextTick, ref, watch } from 'vue'
+import { nextTick, provide, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { findGoods } from '@/api/product'
 import GoodsImage from '@/views/goods/components/goods-image'
@@ -83,6 +83,7 @@ export default {
       }
     }
     const num = ref(1)
+    provide('goods', goods)
     return {
       ArrowRight,
       goods,
