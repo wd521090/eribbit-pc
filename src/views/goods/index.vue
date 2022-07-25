@@ -36,7 +36,10 @@
           <div class="goods-warn"></div>
         </div>
         <!-- 24热榜+专题推荐 -->
-        <div class="goods-aside"></div>
+        <div class="goods-aside">
+          <GoodsHot :goodsId="goods.id" :type="1" />
+          <GoodsHot :goodsId="goods.id" :type="2" />
+        </div>
       </div>
     </div>
   </div>
@@ -55,6 +58,7 @@ import GoodsSku from '@/views/goods/components/good-sku'
 import XtxNumbox from '@/components/library/xtx-numbox'
 import XtxButton from '@/components/library/xtx-button'
 import GoodsTabs from '@/views/goods/components/goods-tabs'
+import GoodsHot from '@/views/goods/components/goods-hot'
 
 export default {
   name: 'GoodsPage',
@@ -66,7 +70,8 @@ export default {
     GoodsSku,
     XtxNumbox,
     XtxButton,
-    GoodsTabs
+    GoodsTabs,
+    GoodsHot
   },
   setup () {
     const goods = useGoods()

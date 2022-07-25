@@ -3,13 +3,13 @@
     <nav>
       <a
         :class="{ active: activeName === 'detail' }"
-        href="javascript:;"
+        href="javascript:"
         @click="clickTab('detail')"
       >商品详情</a
       >
       <a
         :class="{ active: activeName === 'comment' }"
-        href="javascript:;"
+        href="javascript:"
         @click="clickTab('comment')"
       >商品评价<span>(500+)</span></a
       >
