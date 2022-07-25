@@ -18,6 +18,7 @@
         </div>
         <div class="spec">
           <GoodsName :goods="goods"/>
+          <GoodsSku :goods="goods"/>
         </div>
       </div>
       <!-- 商品推荐 -->
@@ -46,6 +47,7 @@ import { findGoods } from '@/api/product'
 import GoodsImage from '@/views/goods/components/goods-image'
 import GoodsSales from '@/views/goods/components/goods-sales'
 import GoodsName from '@/views/goods/components/goods-name'
+import GoodsSku from '@/views/goods/components/good-sku'
 
 export default {
   name: 'GoodsPage',
@@ -53,7 +55,8 @@ export default {
     GoodsRelevant,
     GoodsImage,
     GoodsSales,
-    GoodsName
+    GoodsName,
+    GoodsSku
   },
   setup() {
     const goods = useGoods()
