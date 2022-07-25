@@ -1,13 +1,15 @@
 <template>
-  <div class='xtx-goods-page'  v-if="goods">
+  <div class='xtx-goods-page' v-if="goods">
     <div class="container">
       <!-- 面包屑 -->
       <div class="xtx-bread">
         <el-breadcrumb :separator-icon="ArrowRight">
           <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-          <el-breadcrumb-item :to="'/category/'+goods.categories[0].id">{{goods.categories[0].name}}</el-breadcrumb-item>
-          <el-breadcrumb-item :to="'/category/sub/'+goods.categories[1].id">{{goods.categories[1].name}}</el-breadcrumb-item>
-          <el-breadcrumb-item>{{goods.name}}</el-breadcrumb-item>
+          <el-breadcrumb-item :to="'/category/'+goods.categories[0].id">{{ goods.categories[0].name }}
+          </el-breadcrumb-item>
+          <el-breadcrumb-item :to="'/category/sub/'+goods.categories[1].id">{{ goods.categories[1].name }}
+          </el-breadcrumb-item>
+          <el-breadcrumb-item>{{ goods.name }}</el-breadcrumb-item>
         </el-breadcrumb>
       </div>
       <!-- 商品信息 -->
@@ -18,7 +20,8 @@
         </div>
         <div class="spec">
           <GoodsName :goods="goods"/>
-          <GoodsSku :goods="goods"/>
+          <GoodsSku :goods="goods" @change="changeSku"/>
+          <XtxNumbox label="数量" v-model="num" :max="goods.inventory" />
         </div>
       </div>
       <!-- 商品推荐 -->
@@ -48,6 +51,7 @@ import GoodsImage from '@/views/goods/components/goods-image'
 import GoodsSales from '@/views/goods/components/goods-sales'
 import GoodsName from '@/views/goods/components/goods-name'
 import GoodsSku from '@/views/goods/components/good-sku'
+import XtxNumbox from '@/components/library/xtx-numbox'
 
 export default {
   name: 'GoodsPage',
@@ -56,11 +60,25 @@ export default {
     GoodsImage,
     GoodsSales,
     GoodsName,
-    GoodsSku
+    GoodsSku,
+    XtxNumbox
   },
-  setup() {
+  setup () {
     const goods = useGoods()
-    return { ArrowRight, goods }
+    const changeSku = (sku) => {
+      if (sku.skuId) {
+        goods.value.price = sku.price
+        goods.value.oldPrice = sku.oldPrice
+        goods.value.inventory = sku.inventory
+      }
+    }
+    const num = ref(1)
+    return {
+      ArrowRight,
+      goods,
+      changeSku,
+      num
+    }
   }
 }
 
@@ -89,11 +107,13 @@ const useGoods = () => {
   min-height: 600px;
   background: #fff;
   display: flex;
+
   .media {
     width: 580px;
     height: 600px;
     padding: 30px 50px;
   }
+
   .spec {
     flex: 1;
     padding: 30px 30px 30px 0;
